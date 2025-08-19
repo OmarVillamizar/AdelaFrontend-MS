@@ -49,10 +49,10 @@ const Login = () => {
 
   const LoginButton = ({ userType, title, description }) => (
     <CCard
-      className={`h-100 ${userType === 'estudiante' ? 'p-4' : 'text-white bg-primary py-5 p-4'}`}
+      className={`h-100 ${userType === 'estudiante' ? 'p-4' : 'text-white bg-primary py-5 p-4'} login-card`}
     >
       <CCardBody className="d-flex align-items-center justify-content-center">
-        <div className="d-flex flex-column align-items-center justify-content-center text-center">
+        <div className="d-flex flex-column align-items-center justify-content-center text-center login-card-content">
           <div className="mb-3">
             <h2 className="login-card-title">{title}</h2>
             <p
@@ -133,29 +133,23 @@ const Login = () => {
 
             {/* Mobile logos row */}
             <div className="d-lg-none w-100 mobile-logos">
-              <CRow className="justify-content-center align-items-center">
-                <CCol xs={3} className="text-center">
-                  <img
-                    src={logoUfps}
-                    alt="UFPS Logo"
-                    className="img-fluid mobile-logo"
-                  />
-                </CCol>
-                <CCol xs={3} className="text-center">
-                  <img
-                    src={ingSistemas}
-                    alt="Ingeniería de Sistemas"
-                    className="img-fluid mobile-logo"
-                  />
-                </CCol>
-                <CCol xs={6} className="text-center">
-                  <img
-                    src={chaealogo}
-                    alt="CHAEA Logo"
-                    className="img-fluid mobile-logo-large"
-                  />
-                </CCol>
-              </CRow>
+              <div className="d-flex justify-content-center align-items-center gap-3">
+                <img
+                  src={logoUfps}
+                  alt="UFPS Logo"
+                  className="img-fluid mobile-logo"
+                />
+                <img
+                  src={ingSistemas}
+                  alt="Ingeniería de Sistemas"
+                  className="img-fluid mobile-logo"
+                />
+                <img
+                  src={chaealogo}
+                  alt="CHAEA Logo"
+                  className="img-fluid mobile-logo-large"
+                />
+              </div>
             </div>
           </CHeaderBrand>
         </CContainer>
