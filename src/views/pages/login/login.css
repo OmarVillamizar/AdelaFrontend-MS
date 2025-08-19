@@ -1,69 +1,4 @@
-/* Responsive design for login page */
-@media (max-width: 1200px) {
-  .header-brand {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-  }
-
-  .header-brand img {
-    width: 70px !important;
-    height: 70px !important;
-  }
-
-  .header-brand h1 {
-    font-size: 1.5rem;
-    text-align: center;
-    margin: 10px 0 !important;
-  }
-}
-
-@media (max-width: 992px) {
-  .card-group {
-    flex-direction: column;
-  }
-
-  .card-group > div {
-    margin-bottom: 15px;
-  }
-
-  .card-group .btn {
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .header-brand h1 {
-    font-size: 1.2rem;
-  }
-
-  .header-brand img {
-    width: 50px !important;
-    height: 50px !important;
-  }
-}
-
-@media (max-width: 576px) {
-  .container {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .header-brand h1 {
-    font-size: 1rem;
-  }
-
-  .login-button {
-    padding: 15px !important;
-  }
-
-  .btn-light {
-    font-size: 0.9rem;
-  }
-}
-
-/* Additional responsiveness adjustments */
+/* Base styles */
 body {
   font-size: 16px;
 }
@@ -71,4 +6,359 @@ body {
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* Header styles */
+.login-header {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-brand {
+  padding: 15px 0;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.adela-logo {
+  max-width: 160px;
+  height: auto;
+}
+
+/* Login cards */
+.login-card-group {
+  min-height: 300px;
+}
+
+.login-card-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.login-card-description {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+
+.login-btn {
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 250px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+  background-color: #f8f9fa !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.login-btn-text {
+  font-weight: 500;
+}
+
+/* Mobile logos - hidden by default */
+.mobile-logos {
+  margin-top: 15px;
+}
+
+.mobile-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.mobile-logo-large {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+/* Footer */
+.footer-text {
+  font-size: 0.9rem;
+}
+
+/* Large screens (Desktop) - 1200px and up */
+@media (min-width: 1200px) {
+  .header-brand {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .app-title {
+    font-size: 1.8rem;
+  }
+  
+  .mobile-logos {
+    display: none !important;
+  }
+}
+
+/* Medium-Large screens (Tablets landscape) - 992px to 1199px */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .header-brand {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .header-center {
+    margin: 15px 0;
+  }
+  
+  .app-title {
+    font-size: 1.4rem;
+    padding: 0 20px;
+  }
+  
+  .adela-logo {
+    max-width: 140px;
+  }
+}
+
+/* Medium screens (Tablets portrait) - 768px to 991px */
+@media (max-width: 991px) {
+  .card-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .login-card-group > div {
+    margin-bottom: 0;
+  }
+  
+  .header-brand {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 0;
+  }
+  
+  .header-center {
+    order: 1;
+    margin-bottom: 15px;
+  }
+  
+  .mobile-logos {
+    order: 2;
+    display: block !important;
+  }
+  
+  .app-title {
+    font-size: 1.2rem;
+    padding: 0 15px;
+    line-height: 1.4;
+  }
+  
+  .adela-logo {
+    max-width: 120px;
+  }
+  
+  .login-card-title {
+    font-size: 1.5rem;
+  }
+  
+  .login-card-description {
+    font-size: 0.95rem;
+  }
+  
+  .login-btn {
+    width: 100%;
+    min-width: unset;
+    padding: 15px 20px;
+  }
+}
+
+/* Small screens (Mobile landscape) - 576px to 767px */
+@media (max-width: 767px) {
+  .login-container {
+    padding: 20px 15px;
+  }
+  
+  .header-brand {
+    padding: 15px 10px;
+  }
+  
+  .app-title {
+    font-size: 1rem;
+    padding: 0 10px;
+    line-height: 1.3;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .adela-logo {
+    max-width: 100px;
+  }
+  
+  .mobile-logo {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .mobile-logo-large {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .login-card-title {
+    font-size: 1.4rem;
+  }
+  
+  .login-card-description {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+  
+  .login-btn {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+  }
+  
+  .login-btn-text {
+    font-size: 0.9rem;
+  }
+  
+  .footer-text {
+    font-size: 0.8rem;
+    padding: 0 10px;
+    line-height: 1.4;
+  }
+}
+
+/* Extra small screens (Mobile portrait) - up to 575px */
+@media (max-width: 575px) {
+  .login-container {
+    padding: 15px 10px;
+  }
+  
+  .header-brand {
+    padding: 10px 5px;
+  }
+  
+  .app-title {
+    font-size: 0.9rem;
+    padding: 0 5px;
+    margin-top: 8px;
+  }
+  
+  .adela-logo {
+    max-width: 90px;
+  }
+  
+  .mobile-logo {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .mobile-logo-large {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .login-card-title {
+    font-size: 1.3rem;
+  }
+  
+  .login-card-description {
+    font-size: 0.85rem;
+    padding: 0 5px;
+    line-height: 1.3;
+  }
+  
+  .login-btn {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    min-height: 44px; /* Touch-friendly minimum */
+  }
+  
+  .login-btn img {
+    width: 16px !important;
+  }
+  
+  .login-btn-text {
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+  
+  .footer-text {
+    font-size: 0.75rem;
+    padding: 0 5px;
+  }
+  
+  .login-card-group .card {
+    margin-bottom: 10px;
+  }
+}
+
+/* Very small screens - 400px and below */
+@media (max-width: 400px) {
+  .app-title {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+  
+  .adela-logo {
+    max-width: 80px;
+  }
+  
+  .mobile-logo {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .mobile-logo-large {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .login-card-title {
+    font-size: 1.2rem;
+  }
+  
+  .login-btn-text {
+    font-size: 0.8rem;
+  }
+  
+  .footer-text {
+    font-size: 0.7rem;
+  }
+}
+
+/* Utility classes for better mobile experience */
+@media (max-width: 767px) {
+  .text-break-mobile {
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  .px-mobile-safe {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/* Smooth transitions */
+.login-btn, .app-title, .login-card-title {
+  transition: all 0.3s ease;
+}
+
+/* Focus states for accessibility */
+.login-btn:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
 }

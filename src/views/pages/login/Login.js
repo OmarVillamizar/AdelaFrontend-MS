@@ -52,21 +52,21 @@ const Login = () => {
       className={`h-100 ${userType === 'estudiante' ? 'p-4' : 'text-white bg-primary py-5 p-4'}`}
     >
       <CCardBody className="d-flex align-items-center justify-content-center">
-        <div className="d-flex flex-column align-items-center justify-content-center">
-          <div className="text-center">
-            <h2>{title}</h2>
+        <div className="d-flex flex-column align-items-center justify-content-center text-center">
+          <div className="mb-3">
+            <h2 className="login-card-title">{title}</h2>
             <p
-              className={`${userType === 'estudiante' ? 'text-body-secondary' : 'text-white'}`}
+              className={`login-card-description ${userType === 'estudiante' ? 'text-body-secondary' : 'text-white'}`}
             >
               {description}
             </p>
           </div>
-          <div className="mt-auto">
+          <div className="mt-auto w-100">
             <CRow>
               <CCol xs={12} className="text-center">
                 <a
                   href={`${HOST}/oauth2/authorization/google?userType=${userType}&redirect_to=${baseurl}`}
-                  className="btn btn-light px-4"
+                  className="btn btn-light px-4 login-btn"
                   style={{
                     color: '#DB4437',
                     backgroundColor: 'white',
@@ -79,7 +79,7 @@ const Login = () => {
                     className="me-2"
                     style={{ width: '20px' }}
                   />
-                  Iniciar Sesión como {title}
+                  <span className="login-btn-text">Iniciar Sesión como {title}</span>
                 </a>
               </CCol>
             </CRow>
@@ -91,47 +91,80 @@ const Login = () => {
 
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-column">
-          <CHeader>
-          <CContainer fluid>
-            <CHeaderBrand className="header-brand d-flex align-items-center justify-content-between w-100">
+      <CHeader className="login-header">
+        <CContainer fluid>
+          <CHeaderBrand className="header-brand d-flex align-items-center justify-content-between w-100">
+            {/* Desktop layout - logos on sides, title in center */}
+            <div className="d-none d-lg-flex align-items-center">
               <img
                 src={logoUfps}
                 alt="UFPS Logo"
-                className="img-fluid"
+                className="img-fluid me-3"
                 style={{ width: '90px', height: '90px', objectFit: 'contain' }}
               />
               <img
                 src={ingSistemas}
                 alt="Ingeniería de Sistemas"
-                className="img-fluid mx-3"
+                className="img-fluid"
                 style={{ width: '90px', height: '90px', objectFit: 'contain' }}
               />
-              <div className="text-center mx-3 my-0 flex-grow-1 d-flex flex-column align-items-center">
-              <img
-                    src={AdelaTitle}
-                    alt="Adela Title"
-                    className="img-fluid"
-                    style={{ width: '160px', height: 'auto', objectFit: 'contain', display: 'block' }}
-                  />
+            </div>
 
-                <h2 className="mt-1">Aplicativo para la Detección de Estilo del Aprendizaje</h2>
-              </div>
+            {/* Center title section - responsive */}
+            <div className="text-center flex-grow-1 d-flex flex-column align-items-center header-center">
+              <img
+                src={AdelaTitle}
+                alt="Adela Title"
+                className="img-fluid adela-logo"
+                style={{ width: '160px', height: 'auto', objectFit: 'contain', display: 'block' }}
+              />
+              <h2 className="mt-1 app-title">Aplicativo para la Detección de Estilo del Aprendizaje</h2>
+            </div>
+
+            {/* Desktop right logo */}
+            <div className="d-none d-lg-block">
               <img
                 src={chaealogo}
                 alt="CHAEA Logo"
                 className="img-fluid"
                 style={{ width: '160px', height: '160px', objectFit: 'contain' }}
               />
-            </CHeaderBrand>
-          </CContainer>
-        </CHeader>
+            </div>
 
+            {/* Mobile logos row */}
+            <div className="d-lg-none w-100 mobile-logos">
+              <CRow className="justify-content-center align-items-center">
+                <CCol xs={3} className="text-center">
+                  <img
+                    src={logoUfps}
+                    alt="UFPS Logo"
+                    className="img-fluid mobile-logo"
+                  />
+                </CCol>
+                <CCol xs={3} className="text-center">
+                  <img
+                    src={ingSistemas}
+                    alt="Ingeniería de Sistemas"
+                    className="img-fluid mobile-logo"
+                  />
+                </CCol>
+                <CCol xs={6} className="text-center">
+                  <img
+                    src={chaealogo}
+                    alt="CHAEA Logo"
+                    className="img-fluid mobile-logo-large"
+                  />
+                </CCol>
+              </CRow>
+            </div>
+          </CHeaderBrand>
+        </CContainer>
+      </CHeader>
 
-
-      <CContainer className="flex-grow-1 d-flex align-items-center">
+      <CContainer className="flex-grow-1 d-flex align-items-center login-container">
         <CRow className="w-100 justify-content-center">
           <CCol md={10} lg={8}>
-            <CCardGroup className="h-100 card-group">
+            <CCardGroup className="h-100 card-group login-card-group">
               <LoginButton
                 userType="estudiante"
                 title="Estudiante"
@@ -147,11 +180,11 @@ const Login = () => {
         </CRow>
       </CContainer>
 
-      <CFooter className="bg-light p-3">
+      <CFooter className="bg-light p-3 login-footer">
         <CContainer fluid>
           <CRow>
             <CCol className="text-center">
-              <p className="text-muted mb-0">
+              <p className="text-muted mb-0 footer-text">
                 © {new Date().getFullYear()} ADELA - Aplicativo para la Detección de Estilo del Aprendizaje
               </p>
             </CCol>
