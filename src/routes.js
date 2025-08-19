@@ -66,6 +66,8 @@ const ResultadoCuestionario = React.lazy(
   () => import('./views/estudianteVistaCuestionarios/CuestionarioResuelto.jsx'),
 )
 
+const Donaciones = React.lazy(() => import('./views/donaciones/Donaciones.js'))
+
 const protectedRoutes = [
   {
     path: '/dashboard',
@@ -178,6 +180,14 @@ const protectedRoutes = [
     name: 'Administrar cuentas',
     element: AsignarRoles,
     roles: [Roles.ADMINISTRADOR],
+  },
+  {
+    path: '/donar/',
+    name: 'Donar',
+    element: Donaciones,
+    roles: [Roles.PROFESOR_ACTIVO,
+      Roles.PROFESOR_INCOMPLETO,
+      Roles.PROFESOR_NO_APROBADO, Roles.ADMINISTRADOR],
   },
 ]
 

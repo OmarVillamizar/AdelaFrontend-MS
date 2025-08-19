@@ -92,6 +92,22 @@ const _nav = [
       icon: <CIcon icon={cilGroup} customClassName="nav-icon" />,
       roles: [Roles.ADMINISTRADOR],
     },
+    {
+    component: CNavTitle,
+    name: 'SOPORTE',
+    roles: [Roles.PROFESOR_ACTIVO,
+      Roles.PROFESOR_INCOMPLETO,
+      Roles.PROFESOR_NO_APROBADO, Roles.ADMINISTRADOR],
+  },
+  {
+      component: CNavItem,
+      name: 'Realizar Donación',
+      to: '/donar/',
+      icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+      roles: [Roles.PROFESOR_ACTIVO,
+      Roles.PROFESOR_INCOMPLETO,
+      Roles.PROFESOR_NO_APROBADO, Roles.ADMINISTRADOR],
+    },
 ]
 
 export default _nav
