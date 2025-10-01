@@ -21,6 +21,7 @@ import { Roles } from './util/userUtils'
 
 const _nav = [
   //ADMINISTRAR GRUPOS
+  /*
   {
     component: CNavTitle,
     name: 'Grupos',
@@ -46,6 +47,7 @@ const _nav = [
     icon: <CIcon icon={cilGroup} customClassName="nav-icon" />,
     roles: [Roles.ADMINISTRADOR, Roles.PROFESOR_ACTIVO],
   },
+  */
   //MI CUENTA
   {
     component: CNavTitle,
@@ -84,6 +86,7 @@ const _nav = [
     roles: [Roles.ADMINISTRADOR],
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
   },
+  /*
     //ADMINISTRAR CUESTIONARIOS
     {
       component: CNavItem,
@@ -108,6 +111,7 @@ const _nav = [
       Roles.PROFESOR_INCOMPLETO,
       Roles.PROFESOR_NO_APROBADO, Roles.ADMINISTRADOR],
     },
+    */
 ]
 
 export default _nav
