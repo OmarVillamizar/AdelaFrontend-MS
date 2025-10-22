@@ -21,12 +21,12 @@ import { Roles } from './util/userUtils'
 
 const _nav = [
   //ADMINISTRAR GRUPOS
-  /*
   {
     component: CNavTitle,
     name: 'Grupos',
     roles: [Roles.PROFESOR_ACTIVO, Roles.ADMINISTRADOR],
   },
+  /*
    /////////CUESTIONARIOS
    {
     component: CNavTitle,
@@ -39,7 +39,8 @@ const _nav = [
     to: '/cuestionarios/',
     roles: [Roles.ESTUDIANTE_ACTIVO],
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
+  },¨
+  */
   {
     component: CNavItem,
     name: 'Grupos',
@@ -47,7 +48,6 @@ const _nav = [
     icon: <CIcon icon={cilGroup} customClassName="nav-icon" />,
     roles: [Roles.ADMINISTRADOR, Roles.PROFESOR_ACTIVO],
   },
-  */
   //MI CUENTA
   {
     component: CNavTitle,

@@ -50,6 +50,7 @@ const ProfesorGrupos = () => {
   const [selectedStudents, setSelectedStudents] = useState([])
   const [currentGrupoId, setCurrentGrupoId] = useState(null)
   const [selectedNewStudents, setSelectedNewStudents] = useState([])
+  const [profesores, setProfesores] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -190,7 +191,7 @@ const ProfesorGrupos = () => {
               setModalVisible(false)
               const x = {
                 ...response,
-                numEstudiantes: response.estudiantes.length,
+                numEstudiantes: response.estudianteIds?.length || 0,
               }
               setGrupos([...grupos, x])
               clearForm() // Limpiar la lista de estudiantes seleccionados y otros campos del formulario

@@ -149,7 +149,6 @@ const protectedRoutes = [
       Roles.ADMINISTRADOR,
     ],
   },
-  /*
   {
     path: '/grupos/',
     name: 'Mis Grupos',
@@ -162,6 +161,7 @@ const protectedRoutes = [
     element: ProfesorGrupo,
     roles: [Roles.ADMINISTRADOR, Roles.PROFESOR_ACTIVO],
   },
+  /*
   {
     path: '/resultado/:id',
     name: 'Ver Resultados grupo',

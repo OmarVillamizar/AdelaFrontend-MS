@@ -17,7 +17,6 @@ import { dateFromMsToString } from '../../../util/dateUtils'
 import { updateUserInfo } from '../../../util/services/userService'
 
 const ActualizarEstudiante = () => {
-  // Estado y funciones de manejadores
   const user = useOutletContext()
   const navigate = useNavigate()
 
@@ -35,7 +34,6 @@ const ActualizarEstudiante = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // Validar campos vacíos
     if (!formData.codigo || !formData.fechaNacimiento || !formData.genero) {
       Swal.fire({
         title: 'Campos incompletos',
@@ -46,7 +44,7 @@ const ActualizarEstudiante = () => {
     }
 
     const userUpd = { ...user, ...formData }
-    // Simulación de llamada al backend
+
     updateUserInfo(userUpd)
       .then((response) => {
         if (response.ok) {
@@ -54,11 +52,6 @@ const ActualizarEstudiante = () => {
             title: '¡Cuenta actualizada!',
             text: 'Los datos de la cuenta han sido actualizados correctamente.',
             icon: 'success',
-          }).then(() => {
-            // Agregar un retraso de 5 segundos antes de recargar la página
-            setTimeout(() => {
-              navigate(0)
-            }, 1000)
           })
         } else {
           throw new Error('Error al actualizar la cuenta')
@@ -73,7 +66,6 @@ const ActualizarEstudiante = () => {
       })
   }
 
-  // useEffect para manejar efectos secundarios si es necesario
   useEffect(() => {
     // cargar datos iniciales si es necesario
   }, [])
@@ -140,7 +132,7 @@ const ActualizarEstudiante = () => {
               type="submit"
               className="px-4"
               style={{
-                '--cui-btn-color': '#000000', // Changed to black
+                '--cui-btn-color': '#000000',
                 '--cui-btn-bg': '#ffc107',
                 '--cui-btn-border-color': '#ffc107',
                 '--cui-btn-hover-bg': '#ffca2c',

@@ -1,30 +1,27 @@
 import axios from 'axios'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
-const API_URL = import.meta.env.VITE_BACKEND_URL
+const API_URL = import.meta.env.VITE_BACKEND               // 👉 ms-auth
+const API_URL_GRUPOS = import.meta.env.VITE_BACKEND_GRUPOS // 👉 ms-grupos
 
-const [getToken, setToken, removeToken] = useLocalStorage('authToken')
+const [getToken] = useLocalStorage('authToken')
 
-// Obtener información de los grupos
+// Obtener información de los grupos (ms-grupos)
 export const getGroups = async () => {
   try {
     const token = getToken()
-    const response = await axios.get(`${API_URL}/api/grupos`, {
+    const response = await axios.get(`${API_URL_GRUPOS}/api/grupos`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    if (response.status === 200) {
-      return response.data
-    } else {
-      throw response.message
-    }
+    return response.data
   } catch (error) {
-    throw error.response.data
+    throw error.response?.data || error.message
   }
 }
 
-// Obtener información de los profesores
+// Obtener información de los profesores (ms-auth)
 export const getProfesores = async () => {
   try {
     const token = getToken()
@@ -33,17 +30,13 @@ export const getProfesores = async () => {
         Authorization: `Bearer ${token}`,
       },
     })
-    if (response.status === 200) {
-      return response.data
-    } else {
-      throw response.message
-    }
+    return response.data
   } catch (error) {
-    throw error.response.data
+    throw error.response?.data || error.message
   }
 }
 
-// Obtener información de los estudiantes
+// Obtener información de los estudiantes (ms-auth)
 export const getEstudiantes = async () => {
   try {
     const token = getToken()
@@ -52,69 +45,33 @@ export const getEstudiantes = async () => {
         Authorization: `Bearer ${token}`,
       },
     })
-    if (response.status === 200) {
-      return response.data
-    } else {
-      throw response.message
-    }
+    return response.data
   } catch (error) {
-    throw error.response.data
+    throw error.response?.data || error.message
   }
 }
 
-// Eliminar un grupo
-export const deleteGrupo = async (grupoId) => {
-  try {
-    const token = getToken()
-    const response = await axios.delete(`${API_URL}/api/grupos/${grupoId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    if (response.status === 200) {
-      return response.data
-    } else {
-      throw response.message
-    }
-  } catch (error) {
-    throw error.response.data
-  }
-}
-
+// Crear grupo (👉 debe ir a ms-grupos)
 export const createGrupo = async (grupoDTO) => {
   try {
     const token = getToken()
-    const response = await axios.post(`${API_URL}/api/grupos`, grupoDTO, {
+    const response = await axios.post(`${API_URL_GRUPOS}/api/grupos`, grupoDTO, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    if (response.status === 200 || response.status === 201) {
-      return response.data
-    } else {
-      throw new Error(
-        `Failed to create group: ${response.statusText || response.status}`,
-      )
-    }
+    return response.data
   } catch (error) {
-    if (error.response) {
-      throw new Error(
-        error.response.data.message || 'Error inesperado al crear el grupo',
-      )
-    } else if (error.request) {
-      throw new Error('Error de red: No se recibió respuesta del servidor')
-    } else {
-      throw new Error(`Error inesperado: ${error.message}`)
-    }
+    throw error.response?.data || 'Error inesperado al crear el grupo'
   }
 }
 
-// Añadir estudiantes a un grupo
+// Añadir estudiantes a un grupo (👉 ms-grupos)
 export const addStudentsToGroup = async (grupoId, estudiantes) => {
   try {
     const token = getToken()
     const response = await axios.post(
-      `${API_URL}/api/grupos/${grupoId}/estudiantes`,
+      `${API_URL_GRUPOS}/api/grupos/${grupoId}/estudiantes`,
       estudiantes,
       {
         headers: {
@@ -122,53 +79,56 @@ export const addStudentsToGroup = async (grupoId, estudiantes) => {
         },
       },
     )
-    if (response.status === 200) {
-      return response.data
-    } else {
-      throw response.message
-    }
+    return response.data
   } catch (error) {
-    throw error.response.data
+    throw error.response?.data || error.message
   }
 }
 
-// Eliminar un estudiante de un grupo
+// Eliminar un estudiante de un grupo (👉 ms-grupos)
 export const deleteStudentFromGroup = async (grupoId, estudianteEmail) => {
   try {
     const token = getToken()
     const response = await axios.delete(
-      `${API_URL}/api/grupos/${grupoId}/estudiantes/${estudianteEmail}`,
+      `${API_URL_GRUPOS}/api/grupos/${grupoId}/estudiantes/${estudianteEmail}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       },
     )
-    if (response.status === 200) {
-      return response.data
-    } else {
-      throw response.message
-    }
+    return response.data
   } catch (error) {
-    throw error.response.data
+    throw error.response?.data || error.message
   }
 }
 
-// Obtener la información de un grupo actualizado
+// Obtener un grupo por ID (👉 ms-grupos)
 export const getGroupById = async (grupoId) => {
   try {
     const token = getToken()
-    const response = await axios.get(`${API_URL}/api/grupos/${grupoId}`, {
+    const response = await axios.get(`${API_URL_GRUPOS}/api/grupos/${grupoId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    if (response.status === 200) {
-      return response.data
-    } else {
-      throw response.message
-    }
+    return response.data
   } catch (error) {
-    throw error.response.data
+    throw error.response?.data || error.message
+  }
+}
+
+// Eliminar grupo (👉 ms-grupos)
+export const deleteGrupo = async (grupoId) => {
+  try {
+    const token = getToken()
+    const response = await axios.delete(`${API_URL_GRUPOS}/api/grupos/${grupoId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response.data
+  } catch (error) {
+    throw error.response?.data || error.message
   }
 }

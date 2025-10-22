@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   CForm,
   CCol,
@@ -45,7 +45,6 @@ const ActualizarCuentaProfesor = () => {
 
     // Simulación de llamada al backend
     const userUpd = { ...user, ...formData }
-    // Simulación de llamada al backend
     updateUserInfo(userUpd)
       .then((response) => {
         if (response.ok) {
@@ -53,11 +52,6 @@ const ActualizarCuentaProfesor = () => {
             title: '¡Cuenta actualizada!',
             text: 'Los datos de la cuenta han sido actualizados correctamente.',
             icon: 'success',
-          }).then(() => {
-            // Agregar un retraso de 5 segundos antes de recargar la página
-            setTimeout(() => {
-              navigate(0)
-            }, 1000)
           })
         } else {
           throw new Error('Error al actualizar la cuenta: ')
@@ -91,7 +85,7 @@ const ActualizarCuentaProfesor = () => {
             <CRow className="g-3">
               <CCol md={6}>
                 <CFormInput
-                  type="number" // Modificado para aceptar solo números
+                  type="number"
                   id="inputCodigoNumber"
                   label="Código de Profesor"
                   name="codigo"
