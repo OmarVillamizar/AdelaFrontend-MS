@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams, useOutletContext } from 'react-router-dom'
 import {
   addStudentsToGroup,
+  consultarPorCorreo,
   deleteStudentFromGroup,
   getEstudiantes,
   getGroupById,
@@ -49,17 +50,44 @@ const ProfesorGrupo = () => {
   const [selectedNewStudents, setSelectedNewStudents] = useState([])
   const [searchStudentList, setSearchStudentList] = useState([])
   const navigate = useNavigate()
+useEffect(() => {
+  const fetchGroupData = async () => {
+    try {
+      // Obtiene el grupo por ID
+      const grupito = await getGroupById(id);
 
-  useEffect(() => {
-    getGroupById(id).then((el) => {
-      setGrupo(el)
-      const bools = el.estudiantes.map(() => true)
-      setSearchStudentList(bools)
-      getEstudiantes().then((el) => {
-        setStudents(el)
-      })
-    })
-  }, [])
+      // Obtiene los estudiantes del grupo por correo
+      const estudiantes = await Promise.all(
+        grupito.estudianteIds.map(async (email) => {
+          const estudiantito = await consultarPorCorreo(email);
+          return {
+            email: estudiantito.email,
+            nombre: estudiantito.nombre,
+          };
+        })
+      );
+
+      // Asigna los estudiantes al grupo
+      grupito.estudiantes = estudiantes;
+      setGrupo(grupito);
+
+      // Inicializa la lista de búsqueda de estudiantes
+      const bools = estudiantes.map(() => true);
+      setSearchStudentList(bools);
+
+      // Obtiene todos los estudiantes
+      const todosEstudiantes = await getEstudiantes();
+      setStudents(todosEstudiantes);
+
+      console.log(grupito);
+    } catch (error) {
+      console.error("Error al cargar el grupo:", error);
+    }
+  };
+
+  fetchGroupData();
+}, [id]);
+
 
   const getSuggestions = (value) => {
     const inputValue = value.trim().toLowerCase()

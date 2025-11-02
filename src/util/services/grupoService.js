@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
-const API_URL = import.meta.env.VITE_BACKEND               // 👉 ms-auth
+const API_URL = import.meta.env.VITE_BACKEND_URL             // 👉 ms-auth
 const API_URL_GRUPOS = import.meta.env.VITE_BACKEND_GRUPOS // 👉 ms-grupos
 
 const [getToken] = useLocalStorage('authToken')
@@ -18,6 +18,20 @@ export const getGroups = async () => {
     return response.data
   } catch (error) {
     throw error.response?.data || error.message
+  }
+}
+
+// Consultar Estudiante por Correo
+export const consultarPorCorreo = async (email) => {
+  try {
+    const response = await axios.get(`${API_URL}/api/estudiantes/${email}`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    })
+    return response.data
+  } catch (error) {
+    throw error.response.data
   }
 }
 
