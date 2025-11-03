@@ -1,16 +1,16 @@
 import axios from 'axios'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
-const API_URL = import.meta.env.VITE_BACKEND               // 👉 ms-auth
-const API_URL_GRUPOS = import.meta.env.VITE_BACKEND_GRUPOS // 👉 ms-grupos
+// ✅ Solo usar el Gateway
+const API_URL = import.meta.env.VITE_BACKEND_URL  // http://localhost:8060
 
 const [getToken] = useLocalStorage('authToken')
 
-// Obtener información de los grupos (ms-grupos)
+// Obtener información de los grupos (👉 Gateway → ms-grupos)
 export const getGroups = async () => {
   try {
     const token = getToken()
-    const response = await axios.get(`${API_URL_GRUPOS}/api/grupos`, {
+    const response = await axios.get(`${API_URL}/api/grupos`, {  // ✅ Cambiar aquí
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -21,11 +21,11 @@ export const getGroups = async () => {
   }
 }
 
-// Obtener información de los profesores (ms-auth)
+// Obtener información de los profesores (👉 Gateway → ms-auth)
 export const getProfesores = async () => {
   try {
     const token = getToken()
-    const response = await axios.get(`${API_URL}/api/profesores`, {
+    const response = await axios.get(`${API_URL}/ms-auth/profesores`, {  // ✅ Ya está correcto
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -36,11 +36,11 @@ export const getProfesores = async () => {
   }
 }
 
-// Obtener información de los estudiantes (ms-auth)
+// Obtener información de los estudiantes (👉 Gateway → ms-auth)
 export const getEstudiantes = async () => {
   try {
     const token = getToken()
-    const response = await axios.get(`${API_URL}/api/estudiantes`, {
+    const response = await axios.get(`${API_URL}/ms-auth/estudiantes`, {  // ✅ Ya está correcto
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -51,11 +51,11 @@ export const getEstudiantes = async () => {
   }
 }
 
-// Crear grupo (👉 debe ir a ms-grupos)
+// Crear grupo (👉 Gateway → ms-grupos)
 export const createGrupo = async (grupoDTO) => {
   try {
     const token = getToken()
-    const response = await axios.post(`${API_URL_GRUPOS}/api/grupos`, grupoDTO, {
+    const response = await axios.post(`${API_URL}/api/grupos`, grupoDTO, {  // ✅ Cambiar aquí
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -66,12 +66,12 @@ export const createGrupo = async (grupoDTO) => {
   }
 }
 
-// Añadir estudiantes a un grupo (👉 ms-grupos)
+// Añadir estudiantes a un grupo (👉 Gateway → ms-grupos)
 export const addStudentsToGroup = async (grupoId, estudiantes) => {
   try {
     const token = getToken()
     const response = await axios.post(
-      `${API_URL_GRUPOS}/api/grupos/${grupoId}/estudiantes`,
+      `${API_URL}/api/grupos/${grupoId}/estudiantes`,  // ✅ Cambiar aquí
       estudiantes,
       {
         headers: {
@@ -85,12 +85,12 @@ export const addStudentsToGroup = async (grupoId, estudiantes) => {
   }
 }
 
-// Eliminar un estudiante de un grupo (👉 ms-grupos)
+// Eliminar un estudiante de un grupo (👉 Gateway → ms-grupos)
 export const deleteStudentFromGroup = async (grupoId, estudianteEmail) => {
   try {
     const token = getToken()
     const response = await axios.delete(
-      `${API_URL_GRUPOS}/api/grupos/${grupoId}/estudiantes/${estudianteEmail}`,
+      `${API_URL}/api/grupos/${grupoId}/estudiantes/${estudianteEmail}`,  // ✅ Cambiar aquí
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -103,11 +103,11 @@ export const deleteStudentFromGroup = async (grupoId, estudianteEmail) => {
   }
 }
 
-// Obtener un grupo por ID (👉 ms-grupos)
+// Obtener un grupo por ID (👉 Gateway → ms-grupos)
 export const getGroupById = async (grupoId) => {
   try {
     const token = getToken()
-    const response = await axios.get(`${API_URL_GRUPOS}/api/grupos/${grupoId}`, {
+    const response = await axios.get(`${API_URL}/api/grupos/${grupoId}`, {  // ✅ Cambiar aquí
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -118,11 +118,11 @@ export const getGroupById = async (grupoId) => {
   }
 }
 
-// Eliminar grupo (👉 ms-grupos)
+// Eliminar grupo (👉 Gateway → ms-grupos)
 export const deleteGrupo = async (grupoId) => {
   try {
     const token = getToken()
-    const response = await axios.delete(`${API_URL_GRUPOS}/api/grupos/${grupoId}`, {
+    const response = await axios.delete(`${API_URL}/api/grupos/${grupoId}`, {  // ✅ Cambiar aquí
       headers: {
         Authorization: `Bearer ${token}`,
       },
