@@ -7,28 +7,28 @@ const [getToken, setToken, removeToken] = useLocalStorage('authToken')
 
 export const callTest = async (url, body, method) => {
   if (method === 'POST') {
-    const response = await axios.post(`${API_URL}/api/${url}`, body, {
+    const response = await axios.post(`${API_URL}/ms-auth/${url}`, body, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
     })
     return response
   } else if (method === 'GET') {
-    const response = await axios.get(`${API_URL}/api/${url}`, {
+    const response = await axios.get(`${API_URL}/ms-auth/${url}`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
     })
     return response
   } else if (method === 'DELETE') {
-    const response = await axios.delete(`${API_URL}/api/${url}`, {
+    const response = await axios.delete(`${API_URL}/ms-auth/${url}`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
     })
     return response
   } else if (method === 'PUT') {
-    const response = await axios.put(`${API_URL}/api/${url}`, body, {
+    const response = await axios.put(`${API_URL}/ms-auth/${url}`, body, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },

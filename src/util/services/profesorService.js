@@ -7,7 +7,7 @@ const [getToken] = useLocalStorage('authToken')
 // Listar Profesores
 export const listarProfesores = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/profesores`, {
+    const response = await axios.get(`${API_URL}/ms-auth/profesores`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
@@ -21,7 +21,7 @@ export const listarProfesores = async () => {
 // Consultar Profesor por Correo
 export const consultarPorCorreo = async (email) => {
   try {
-    const response = await axios.get(`${API_URL}/api/profesores/${email}`, {
+    const response = await axios.get(`${API_URL}/ms-auth/profesores/${email}`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
@@ -36,7 +36,7 @@ export const consultarPorCorreo = async (email) => {
 export const eliminarProfesor = async (email) => {
   try {
     const response = await axios.delete(
-      `${API_URL}/api/profesores/deactivate/${email}`,
+      `${API_URL}/ms-auth/profesores/deactivate/${email}`,
       {
         headers: {
           Authorization: `Bearer ${getToken()}`,
@@ -53,7 +53,7 @@ export const eliminarProfesor = async (email) => {
 export const activarCuentaProfesor = async (email) => {
   try {
     const response = await axios.put(
-      `${API_URL}/api/profesores/activate/${email}`,
+      `${API_URL}/ms-auth/profesores/activate/${email}`,
       null,
       {
         headers: {
@@ -71,7 +71,7 @@ export const activarCuentaProfesor = async (email) => {
 export const elevarCuentaProfesor = async (email) => {
   try {
     const response = await axios.put(
-      `${API_URL}/api/profesores/elevate/${email}`,
+      `${API_URL}/ms-auth/profesores/elevate/${email}`,
       null,
       {
         headers: {
@@ -89,7 +89,7 @@ export const elevarCuentaProfesor = async (email) => {
 export const bajarCuentaProfesor = async (email) => {
   try {
     const response = await axios.put(
-      `${API_URL}/api/profesores/demote/${email}`,
+      `${API_URL}/ms-auth/profesores/demote/${email}`,
       null,
       {
         headers: {
@@ -107,7 +107,7 @@ export const bajarCuentaProfesor = async (email) => {
 export const rechazarSolicitudCuentaProfesor = async (email) => {
   try {
     const response = await axios.delete(
-      `${API_URL}/api/profesores/reject/${email}`,
+      `${API_URL}/ms-auth/profesores/reject/${email}`,
       {
         headers: {
           Authorization: `Bearer ${getToken()}`,
@@ -123,7 +123,7 @@ export const rechazarSolicitudCuentaProfesor = async (email) => {
 // Actualizar Profesor
 export const actualizarProfesor = async (profesorDTO) => {
   try {
-    const response = await axios.put(`${API_URL}/api/profesores`, profesorDTO, {
+    const response = await axios.put(`${API_URL}/ms-auth/profesores`, profesorDTO, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
