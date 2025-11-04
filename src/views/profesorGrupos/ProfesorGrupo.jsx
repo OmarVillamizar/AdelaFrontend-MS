@@ -4,6 +4,7 @@ import {
   addStudentsToGroup,
   deleteStudentFromGroup,
   getEstudiantes,
+  getEstudiantesPorEmail,
   getGroupById,
 } from '../../util/services/grupoService'
 import {
@@ -33,6 +34,7 @@ import Autosuggest from 'react-autosuggest'
 import Swal from 'sweetalert2'
 import CIcon from '@coreui/icons-react'
 import { cilSearch } from '@coreui/icons'
+import { consultarPorCorreo } from '../../util/services/profesorService'
 
 const ProfesorGrupo = () => {
   const user = useOutletContext()
@@ -51,9 +53,19 @@ const ProfesorGrupo = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    getGroupById(id).then((el) => {
-      setGrupo(el)
+    getGroupById(id).then(async (el) => {
+      
+      const estudiantes = await Promise.all(el.estudiantesEmails.map(async (email) => {
+        const estudiante = await getEstudiantesPorEmail(email)
+        return estudiante
+      }))
+      console.log(estudiantes);
+      
+      el.estudiantes = estudiantes
+      console.log(el);
+      
       const bools = el.estudiantes.map(() => true)
+      setGrupo(el)
       setSearchStudentList(bools)
       getEstudiantes().then((el) => {
         setStudents(el)
@@ -68,8 +80,8 @@ const ProfesorGrupo = () => {
     return inputLength === 0
       ? []
       : students.filter((student) =>
-          student.email.toLowerCase().includes(inputValue),
-        )
+        student.email.toLowerCase().includes(inputValue),
+      )
   }
 
   const getSuggestionValue = (suggestion) => suggestion.email

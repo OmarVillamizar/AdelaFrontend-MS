@@ -51,6 +51,21 @@ export const getEstudiantes = async () => {
   }
 }
 
+export const getEstudiantesPorEmail = async (email) => {
+  try {
+    const token = getToken()
+    const response = await axios.get(`${API_URL}/ms-auth/estudiantes/${email}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response.data
+  } catch (error) {
+    throw error.response?.data || error.message
+  }
+}
+
+
 // Crear grupo (👉 Gateway → ms-grupos)
 export const createGrupo = async (grupoDTO) => {
   try {
