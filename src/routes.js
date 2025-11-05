@@ -38,6 +38,9 @@ const ReporteGrupo = React.lazy(
 const ReporteEstudiante = React.lazy(
   () => import('./views/profesorGrupos/ReporteEstudiante'),
 )
+const EstadisticasGrupo = React.lazy(
+  () => import('./views/profesorGrupos/EstadisticasGrupo'),
+)
 
 //Estudiante Vista Cuestionarios
 const EstudianteVistaCuestionarios = React.lazy(
@@ -159,6 +162,12 @@ const protectedRoutes = [
     path: '/grupos/:id',
     name: 'Ver grupo',
     element: ProfesorGrupo,
+    roles: [Roles.ADMINISTRADOR, Roles.PROFESOR_ACTIVO],
+  },
+  {
+    path: '/grupos/:id/estadisticas',
+    name: 'Estadísticas del Grupo',
+    element: EstadisticasGrupo,
     roles: [Roles.ADMINISTRADOR, Roles.PROFESOR_ACTIVO],
   },
   /*

@@ -82,6 +82,9 @@ export const createGrupo = async (grupoDTO) => {
 }
 
 // Añadir estudiantes a un grupo (👉 Gateway → ms-grupos)
+// NOTA: El backend debe enviar de forma asincrónica un correo de bienvenida
+// a cada estudiante añadido, indicando el cuestionario que debe responder
+// para evaluar su estilo de aprendizaje.
 export const addStudentsToGroup = async (grupoId, estudiantes) => {
   try {
     const token = getToken()
@@ -138,6 +141,21 @@ export const deleteGrupo = async (grupoId) => {
   try {
     const token = getToken()
     const response = await axios.delete(`${API_URL}/api/grupos/${grupoId}`, {  // ✅ Cambiar aquí
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response.data
+  } catch (error) {
+    throw error.response?.data || error.message
+  }
+}
+
+// Obtener estadísticas del grupo por categoría (número y porcentaje)
+export const obtenerEstadisticasGrupo = async (grupoId) => {
+  try {
+    const token = getToken()
+    const response = await axios.get(`${API_URL}/api/grupos/${grupoId}/estadisticas`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

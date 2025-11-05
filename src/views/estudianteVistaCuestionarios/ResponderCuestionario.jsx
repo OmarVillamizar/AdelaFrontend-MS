@@ -96,10 +96,14 @@ const ResponderCuestionario = () => {
     }
 
     try {
+      // El backend debe:
+      // 1. Procesar las respuestas y calcular la categoría del estudiante (Lector-escritor, Auditivo, Kinestésico, Visual)
+      // 2. Guardar la categoría obtenida por medio de un evento en la tabla de estadísticas del grupo
+      // 3. Actualizar el total de estudiantes por categoría en el grupo
       await responderCuestionario(respuestasDTO)
       Swal.fire(
         '¡Enviado!',
-        'Tu cuestionario ha sido enviado.',
+        'Tu cuestionario ha sido enviado y tu categoría de aprendizaje ha sido registrada.',
         'success',
       ).then(() => {
         navigate('/cuestionarios')

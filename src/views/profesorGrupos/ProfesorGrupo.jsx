@@ -139,7 +139,15 @@ const ProfesorGrupo = () => {
       .then((response) => {
         // Hacer una solicitud adicional para obtener la información actualizada del grupo
         getGroupById(currentGrupoId)
-          .then((updatedGrupo) => {
+          .then(async (updatedGrupo) => {
+            // Obtener información completa de estudiantes para actualizar el estado
+            const estudiantes = await Promise.all(
+              updatedGrupo.estudiantesEmails.map(async (email) => {
+                const estudiante = await getEstudiantesPorEmail(email)
+                return estudiante
+              })
+            )
+            updatedGrupo.estudiantes = estudiantes
             setGrupo(updatedGrupo)
             setSearchStudentList(
               new Array(updatedGrupo.estudiantes.length).fill(true),
@@ -148,7 +156,7 @@ const ProfesorGrupo = () => {
             setModalAddStudentVisible(false)
             Swal.fire({
               title: '¡Añadidos!',
-              text: 'Los estudiantes han sido añadidos.',
+              text: 'Los estudiantes han sido añadidos al grupo. Se les enviará un correo de bienvenida con la información del cuestionario asignado.',
               icon: 'success',
             })
           })
@@ -227,6 +235,20 @@ const ProfesorGrupo = () => {
                 <CIcon icon={cilSearch} />
               </CInputGroupText>
             </CInputGroup>
+
+            <CButton
+              color="info"
+              size="md"
+              style={{
+                color: 'white',
+              }}
+              onClick={(e) => {
+                e.stopPropagation()
+                navigate(`/grupos/${grupo.id}/estadisticas`)
+              }}
+            >
+              Ver Estadísticas
+            </CButton>
 
             <CButton
               color="success"

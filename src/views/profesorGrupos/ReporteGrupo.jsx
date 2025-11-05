@@ -188,6 +188,47 @@ const ReporteGrupo = () => {
                         ))}
                       </CRow>
                     </div>
+                    {/* Estadísticas por categoría - Número y porcentaje */}
+                    {reporte.estadisticasPorCategoria && (
+                      <div className="mt-4">
+                        <h5>Estadísticas por Categoría de Aprendizaje</h5>
+                        <p className="text-muted">
+                          Distribución de estudiantes según su estilo de aprendizaje
+                        </p>
+                        <CTable hover responsive className="mt-3">
+                          <CTableHead>
+                            <CTableRow>
+                              <CTableHeaderCell>Categoría</CTableHeaderCell>
+                              <CTableHeaderCell className="text-center">
+                                Número de Estudiantes
+                              </CTableHeaderCell>
+                              <CTableHeaderCell className="text-center">
+                                Porcentaje
+                              </CTableHeaderCell>
+                            </CTableRow>
+                          </CTableHead>
+                          <CTableBody>
+                            {reporte.estadisticasPorCategoria.map(
+                              (estadistica, index) => (
+                                <CTableRow key={index}>
+                                  <CTableDataCell>
+                                    <strong>{estadistica.categoria}</strong>
+                                  </CTableDataCell>
+                                  <CTableDataCell className="text-center">
+                                    {estadistica.numeroEstudiantes}
+                                  </CTableDataCell>
+                                  <CTableDataCell className="text-center">
+                                    <span className="badge bg-primary">
+                                      {estadistica.porcentaje.toFixed(2)}%
+                                    </span>
+                                  </CTableDataCell>
+                                </CTableRow>
+                              ),
+                            )}
+                          </CTableBody>
+                        </CTable>
+                      </div>
+                    )}
                   </CCol>
                   <CCol md={6}>
                     <CChartBar
