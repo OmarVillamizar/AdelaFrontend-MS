@@ -18,7 +18,7 @@ import {
 } from '@coreui/react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { obtenerReporteGrupo } from '../../util/services/cuestionarioService'
-import { CChartBar, CChartPolarArea, CChartRadar } from '@coreui/react-chartjs'
+import { CChartBar, CChartPolarArea, CChartRadar, CChartDoughnut } from '@coreui/react-chartjs'
 import Swal from 'sweetalert2'
 import CIcon from '@coreui/icons-react'
 import { cilChart, cilCloudDownload } from '@coreui/icons'
@@ -106,6 +106,13 @@ const ReporteGrupo = () => {
     )
   }
 
+  // ---- NUEVO: cálculo de porcentajes por categoría ----
+  const totalValor = reporte.categorias.reduce((acc, c) => acc + (c.valor || 0), 0)
+  const categoriasPorcentaje = reporte.categorias.map((c) => ({
+    nombre: c.nombre,
+    porcentaje: totalValor > 0 ? ((c.valor / totalValor) * 100).toFixed(2) : 0,
+  }))
+
   return (
     <CContainer>
       <CAlert
@@ -119,9 +126,7 @@ const ReporteGrupo = () => {
           margin: '0 0.6rem 0 0.6rem',
         }}
       >
-        <span className="fw-semibold text-black">
-          REPORTE DE RESULTADOS GRUPO
-        </span>
+        <span className="fw-semibold text-black">REPORTE DE RESULTADOS GRUPO</span>
         <div className="d-flex gap-2">
           <CButton
             color="primary"
@@ -131,10 +136,7 @@ const ReporteGrupo = () => {
             <CIcon icon={cilCloudDownload} className="me-2" />
             Descargar PDF
           </CButton>
-          <CButton
-            color="secondary"
-            onClick={() => navigate(`/resultado/${id2}/`)}
-          >
+          <CButton color="secondary" onClick={() => navigate(`/resultado/${id2}/`)}>
             Volver
           </CButton>
         </div>
@@ -205,16 +207,59 @@ const ReporteGrupo = () => {
                         responsive: true,
                         scales: {
                           y: {
-                            max: Math.max(
-                              ...reporte.categorias.map((c) => c.valorMaximo),
-                            ),
-                            min: Math.min(
-                              ...reporte.categorias.map((c) => c.valorMinimo),
-                            ),
+                            max: Math.max(...reporte.categorias.map((c) => c.valorMaximo)),
+                            min: Math.min(...reporte.categorias.map((c) => c.valorMinimo)),
                           },
                         },
                       }}
                     />
+                  </CCol>
+                </CRow>
+
+                {/* NUEVO: gráfico de porcentaje de estudiantes por categoría */}
+                <CRow className="mt-5">
+                  <CCol md={12}>
+                    <h5>Distribución porcentual de categorías</h5>
+                  </CCol>
+                  <CCol md={6}>
+                    <CChartDoughnut
+                      data={{
+                        labels: categoriasPorcentaje.map((c) => c.nombre),
+                        datasets: [
+                          {
+                            data: categoriasPorcentaje.map((c) => c.porcentaje),
+                            backgroundColor: [
+                              '#36A2EB',
+                              '#FF6384',
+                              '#FFCE56',
+                              '#4BC0C0',
+                              '#9966FF',
+                              '#FF9F40',
+                            ],
+                          },
+                        ],
+                      }}
+                      options={{
+                        plugins: {
+                          tooltip: {
+                            callbacks: {
+                              label: function (context) {
+                                return `${context.label}: ${context.formattedValue}%`
+                              },
+                            },
+                          },
+                        },
+                      }}
+                    />
+                  </CCol>
+                  <CCol md={6}>
+                    <ul>
+                      {categoriasPorcentaje.map((c, index) => (
+                        <li key={index}>
+                          <strong>{c.nombre}:</strong> {c.porcentaje}%
+                        </li>
+                      ))}
+                    </ul>
                   </CCol>
                 </CRow>
 
@@ -288,9 +333,7 @@ const ReporteGrupo = () => {
                     {reporte.estudiantesResuelto.map((estudiante, index) => (
                       <CTableRow key={index}>
                         <CTableDataCell>{index + 1}</CTableDataCell>
-                        <CTableDataCell>
-                          {estudiante.estudiante.nombre}
-                        </CTableDataCell>
+                        <CTableDataCell>{estudiante.estudiante.nombre}</CTableDataCell>
                         <CTableDataCell>Resuelto</CTableDataCell>
                         <CTableDataCell>
                           <Link to={`/reporte-estudiante/${estudiante.id}`}>
@@ -302,15 +345,11 @@ const ReporteGrupo = () => {
                       </CTableRow>
                     ))}
                     {reporte.estudiantesNoResuelto.map((estudiante, index) => (
-                      <CTableRow
-                        key={reporte.estudiantesResuelto.length + index}
-                      >
+                      <CTableRow key={reporte.estudiantesResuelto.length + index}>
                         <CTableDataCell>
                           {reporte.estudiantesResuelto.length + index + 1}
                         </CTableDataCell>
-                        <CTableDataCell>
-                          {estudiante.estudiante.nombre}
-                        </CTableDataCell>
+                        <CTableDataCell>{estudiante.estudiante.nombre}</CTableDataCell>
                         <CTableDataCell>No Resuelto</CTableDataCell>
                         <CTableDataCell>-</CTableDataCell>
                       </CTableRow>
