@@ -82,14 +82,12 @@ const protectedRoutes = [
     element: ActualizarEstudiante,
     roles: [Roles.ESTUDIANTE_ACTIVO, Roles.ESTUDIANTE_INCOMPLETO],
   },
-  /*
   {
     path: '/cuestionarios/',
     name: 'Cuestionarios',
     element: EstudianteVistaCuestionarios,
     roles: [Roles.ESTUDIANTE_ACTIVO],
   },
-  */
   //GESTION DE CUESTIONARIOS PARA PROFESOR
   {
     path: '/administrar-cuestionarios/',
@@ -98,7 +96,6 @@ const protectedRoutes = [
     roles: [Roles.ADMINISTRADOR, Roles.PROFESOR_ACTIVO],
   },
   //CREACION CUESTIONARIOS
-  /*
   {
     path: '/crear-cuestionarios/',
     name: 'Crear Cuestionarios',
@@ -137,7 +134,6 @@ const protectedRoutes = [
     element: ReporteGrupo,
     roles: [Roles.ADMINISTRADOR, Roles.PROFESOR_ACTIVO],
   },
-  */
   {
     path: '/cuenta/actualizar-cuenta-profesor/',
     name: 'Actualizar mi cuenta',
@@ -161,7 +157,6 @@ const protectedRoutes = [
     element: ProfesorGrupo,
     roles: [Roles.ADMINISTRADOR, Roles.PROFESOR_ACTIVO],
   },
-  /*
   {
     path: '/resultado/:id',
     name: 'Ver Resultados grupo',
@@ -180,14 +175,12 @@ const protectedRoutes = [
     element: null,
     roles: [Roles.ADMINISTRADOR, Roles.PROFESOR_ACTIVO],
   },
-*/
   {
     path: '/cuentas/',
     name: 'Administrar cuentas',
     element: AsignarRoles,
     roles: [Roles.ADMINISTRADOR],
   },
-  /*
   {
     path: '/donar/',
     name: 'Donar',
@@ -195,7 +188,7 @@ const protectedRoutes = [
     roles: [Roles.PROFESOR_ACTIVO,
       Roles.PROFESOR_INCOMPLETO,
       Roles.PROFESOR_NO_APROBADO, Roles.ADMINISTRADOR],
-  }*/
+  },
 ]
 
 export { protectedRoutes }

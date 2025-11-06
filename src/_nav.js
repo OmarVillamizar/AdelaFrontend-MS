@@ -26,7 +26,6 @@ const _nav = [
     name: 'Grupos',
     roles: [Roles.PROFESOR_ACTIVO, Roles.ADMINISTRADOR],
   },
-  /*
    /////////CUESTIONARIOS
    {
     component: CNavTitle,
@@ -39,8 +38,7 @@ const _nav = [
     to: '/cuestionarios/',
     roles: [Roles.ESTUDIANTE_ACTIVO],
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },¨
-  */
+  },
   {
     component: CNavItem,
     name: 'Grupos',
@@ -86,7 +84,6 @@ const _nav = [
     roles: [Roles.ADMINISTRADOR],
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
   },
-  /*
     //ADMINISTRAR CUESTIONARIOS
     {
       component: CNavItem,
@@ -111,7 +108,6 @@ const _nav = [
       Roles.PROFESOR_INCOMPLETO,
       Roles.PROFESOR_NO_APROBADO, Roles.ADMINISTRADOR],
     },
-    */
 ]
 
 export default _nav
